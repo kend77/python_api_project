@@ -19,14 +19,18 @@ user_input = input("What type of joke do you want to hear? ")
 
 response = request_joke(user_input)
 results = response.json()["results"]
-random_result = choice(results)["joke"]
+
 
 jokes = None
 if len(results) > 1:
     jokes = "jokes"
-else:
+elif len(results) > 0:
     joke = "joke"
 
 
-print(
-    f"I've got {len(results)} {jokes} about {user_input}. Here\'s one: \n{random_result} ")
+if len(results) == 0:
+    print(f"Sorry, I couldn\'t find a joke with your term: {user_input}")
+else:
+    random_result = choice(results)["joke"]
+    print(
+        f"I've got {len(results)} {jokes} about {user_input}. Here\'s one: \n{random_result} ")
